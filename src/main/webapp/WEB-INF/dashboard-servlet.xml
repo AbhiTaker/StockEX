@@ -6,8 +6,21 @@
 	    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 	    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	    <context:component-scan base-package="com.stockex" />
-	
+	    <context:component-scan base-package="com.stockex.mvc" />
+		
+		 <bean
+        	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        	<property name="prefix">
+            	<value>/WEB-INF/views/</value>
+       		 </property>
+        	<property name="suffix">
+          	  <value>.jsp</value>
+        	</property>
+   		 </bean>
+    	
+    	<!-- For mapping to /assests for css, img and js files-->
+    	<mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" />
+    	
 	    <mvc:annotation-driven />
 	    
 	</beans>

@@ -63,7 +63,7 @@
             <div class="content">
                 <div class="container">
                     <div class="col-md-4 col-sm-6 ml-auto mr-auto">
-                        <form class="form" method="POST" action="/dashboard">
+                        <form class="form" method="POST" action="/stockex/login">
                             <div class="card card-login card-hidden">
                                 <div class="card-header ">
                                     <h3 class="header text-center">Login</h3>
@@ -72,19 +72,19 @@
                                     <div class="card-body">
 										<div class="form-group">
 											<label>User Type</label>
-											<select class="form-control">
-												<option value="admin">Admin</option>
-												<option value="broker">Broker</option>
-												<option value="client">Client</option>
+											<select name="user" class="form-control">
+												<option value="admin" name="admin">Admin</option>
+												<option value="broker" name="broker">Broker</option>
+												<option value="client" name="client">Client</option>
 											</select>
 										</div>
                                         <div class="form-group">
                                             <label>Email address</label>
-                                            <input type="email" placeholder="Enter email" class="form-control">
+                                            <input name="mail" type="email" placeholder="Enter email" class="form-control">
 										</div>
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="password" placeholder="Password" class="form-control">
+                                            <input name="password" type="password" placeholder="Password" class="form-control">
                                         </div>
                                     </div>
                                 </div>
