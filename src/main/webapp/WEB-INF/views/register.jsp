@@ -32,59 +32,106 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbar">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="../dashboard.html" class="nav-link">
+                            <a href="dashboard.html" class="nav-link">
                                 <i class="nc-icon nc-chart-pie-35"></i> Dashboard
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item  active ">
                             <a href="register.html" class="nav-link">
                                 <i class="nc-icon nc-badge"></i> Register
                             </a>
                         </li>
-                        <li class="nav-item  active ">
+                        <li class="nav-item ">
                             <a href="login.html" class="nav-link">
                                 <i class="nc-icon nc-mobile"></i> Login
                             </a>
                         </li>
+                    </ul>
                 </div>
             </div>
         </nav>
         <!-- End Navbar -->
-        <div class="full-page  section-image" data-color="black" data-image="assets/img/full-screen-image-2.jpg" ;>
-            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+        <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
+        <div class="full-page register-page section-image" data-color="orange" data-image="assets/img/bg5.jpg">
             <div class="content">
                 <div class="container">
-                    <div class="col-md-4 col-sm-6 ml-auto mr-auto">
-                        <form class="form" method="POST" action="/stockex/login">
-                            <div class="card card-login card-hidden">
-                                <div class="card-header ">
-                                    <h3 class="header text-center">Login</h3>
+                    <div class="card card-register card-plain text-center">
+                        <div class="card-header ">
+                            <div class="row  justify-content-center">
+                                <div class="col-md-8">
+                                    <div class="header-text">
+                                        <h2 class="card-title">StockEX</h2>
+                                        <h4 class="card-subtitle">Stock and Portfolio Management Solution</h4>
+                                        <hr />
+                                    </div>
                                 </div>
-                                <div class="card-body ">
-                                    <div class="card-body">
-										<div class="form-group">
-											<label>User Type</label>
-											<select name="usertype" class="form-control">
-												<option value="admin" name="admin">Admin</option>
-												<option value="broker" name="broker">Broker</option>
-												<option value="client" name="client">Client</option>
-											</select>
-										</div>
-                                        <div class="form-group">
-                                            <label>Email address</label>
-                                            <input name="mail" type="email" placeholder="Enter email" class="form-control">
-										</div>
-                                        <div class="form-group">
-                                            <label>Password</label>
-                                            <input name="password" type="password" placeholder="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-md-5 ml-auto">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="icon">
+                                                <i class="nc-icon nc-circle-09"></i>
+                                            </div>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4>Free Account</h4>
+                                            <p>Manage you portfolio for Free.</p>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="icon">
+                                                <i class="nc-icon nc-preferences-circle-rotate"></i>
+                                            </div>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4>Awesome Performances</h4>
+                                            <p>Get full report of your Stock performance in interactive Fashion.</p>
+                                        </div>
+                                    </div>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <div class="icon">
+                                                <i class="nc-icon nc-planet"></i>
+                                            </div>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4>Global Support</h4>
+                                            <p>Place request for Stocks from anywhere.</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer ml-auto mr-auto">
-                                    <button type="submit" class="btn btn-warning btn-wd">Login</button>
+                                <div class="col-md-4 mr-auto">
+                                    <form method="#" action="#">
+                                        <div class="card card-plain">
+                                            <div class="content">
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="Your First Name" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="Your Last Name" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" placeholder="Enter email" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" placeholder="Password" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" placeholder="Password Confirmation" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="footer text-center">
+                                                <button type="submit" class="btn btn-fill btn-neutral btn-wd">Create Account</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,13 +166,13 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script>
-                        <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                        <a href="https://github.com/AbhiTaker">AbhiTaker</a>, made with love for a better web
                     </p>
                 </nav>
             </div>
         </footer>
     </div>
-            
+    
 </body>
 <!--   Core JS Files   -->
 <script src="assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
