@@ -32,9 +32,9 @@ public class LoginController {
 		System.out.println(mail);
 		System.out.println(password);
 		User newUser = new User();
-		newUser.usertype = usertype;
-		newUser.mail = mail;
-		newUser.password = password;
+		newUser.setUsertype(usertype);
+		newUser.setEmail(mail);
+		newUser.setPassword(password);
 		
 		if(auth.authenticate(newUser)) {
 			model.addAttribute("username", usertype);
