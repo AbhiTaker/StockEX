@@ -9,7 +9,7 @@ public interface UserDAO {
   public void setDataSource(DataSource ds);
   
   // create a new user record in the users table
-  public void create(String name, String email);
+  public void createUser(User user);
   
   // get a user with the passed email
   public User getUser(String email);

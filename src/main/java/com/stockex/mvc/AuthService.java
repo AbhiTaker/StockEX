@@ -1,6 +1,7 @@
 package com.stockex.mvc;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +14,24 @@ public class AuthService {
 	
 	public boolean authenticate(User user) {
 		
-		User val = userJDBC.getUser(user.getEmail());
-		if(val == null)
-			return false;
-			System.out.println(val.getEmail());
-			System.out.println(val.getPassword());
-			System.out.println(val.getFirstName());
-			System.out.println(val.getLastName());
-			System.out.println(val.getUsertype());
+		List<User> users = userJDBC.listUsers();
+		for(User val: users) {
+			if(Objects.equals(user.getEmail(), val.getEmail()) && Objects.equals(user.getEmail(), val.getEmail())
+					&& Objects.equals(user.getUsertype(), val.getUsertype()))
+				return true;
+		}
 		
+		return false;
+	}
+	
+	public boolean registerUser(User user) {
+		
+		List<User> users = userJDBC.listUsers();
+		for(User val: users) {
+			if(Objects.equals(user.getEmail(), val.getEmail()))
+				return false;
+		}
+		userJDBC.createUser(user);
 		return true;
 	}
 

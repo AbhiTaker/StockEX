@@ -1,5 +1,7 @@
 package com.stockex.mvc;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,21 +21,15 @@ public class LoginController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET )
-	public String register() {
-		return "register";
-	}
-	
-	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginCheck(Model model, @RequestParam String usertype, 
-			@RequestParam String mail, @RequestParam String password) {
+			@RequestParam String email, @RequestParam String password) {
 		System.out.println(usertype);
-		System.out.println(mail);
+		System.out.println(email);
 		System.out.println(password);
 		User newUser = new User();
 		newUser.setUsertype(usertype);
-		newUser.setEmail(mail);
+		newUser.setEmail(email);
 		newUser.setPassword(password);
 		
 		if(auth.authenticate(newUser)) {
@@ -41,6 +37,38 @@ public class LoginController {
 			return "dashboard";
 		}
 		return "login";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET )
+	public String register() {
+		return "register";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST )
+	public String registerUser(@RequestParam String first_name, 
+			@RequestParam String last_name, @RequestParam String email,
+			@RequestParam String password, @RequestParam String confirm_password) {
+		
+		System.out.println(first_name);
+		System.out.println(last_name);
+		System.out.println(email);
+		System.out.println(password);
+		
+		if(!Objects.equals(password, confirm_password))
+			return "redirect:register";
+		
+
+		User newUser = new User();
+		newUser.setUsertype("client");
+		newUser.setFirstName(first_name);
+		newUser.setLastName(last_name);
+		newUser.setEmail(email);
+		newUser.setPassword(password);
+		if(auth.registerUser(newUser))
+			return "dashboard";
+		else
+			return "redirect:register";
+		
 	}
 	
 }

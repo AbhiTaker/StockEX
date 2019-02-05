@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Light Bootstrap Dashboard</title>
+    <title>StockEX</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -105,23 +105,23 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 mr-auto">
-                                    <form method="#" action="#">
+                                    <form method="POST" action="/stockex/register">
                                         <div class="card card-plain">
                                             <div class="content">
                                                 <div class="form-group">
-                                                    <input type="text" placeholder="Your First Name" class="form-control">
+                                                    <input name="first_name" type="text" placeholder="Your First Name" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" placeholder="Your Last Name" class="form-control">
+                                                    <input name="last_name" type="text" placeholder="Your Last Name" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="email" placeholder="Enter email" class="form-control">
+                                                    <input name="email" type="email" placeholder="Enter email" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" placeholder="Password" class="form-control">
+                                                    <input name="password" type="password" placeholder="Password" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" placeholder="Password Confirmation" class="form-control">
+                                                    <input name="confirm_password" type="password" placeholder="Password Confirmation" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="footer text-center">

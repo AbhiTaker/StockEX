@@ -15,10 +15,10 @@ public class UserDAOJDBCImpl implements UserDAO {
     jdbcTemplate = new JdbcTemplate(dataSource);
   }
   
-  public void create(String name, String email) {
-    String sql = "insert into users (name, email) values (?, ?)";
-    jdbcTemplate.update(sql, name, email);
-    System.out.println("Created User Name = " + name + " Email = " + email);
+  public void createUser(User user) {
+    String sql = "insert into users (email, password, first_name, last_name, usertype) values (?, ?, ?, ?, ?)";
+    jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getUsertype());
+    System.out.println("Created User Name = " + user.getFirstName() + " Email = " + user.getEmail());
   }
   
   public User getUser(String email) {

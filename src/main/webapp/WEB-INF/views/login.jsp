@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Light Bootstrap Dashboard</title>
+    <title>StockEX</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -72,7 +72,7 @@
 										</div>
                                         <div class="form-group">
                                             <label>Email address</label>
-                                            <input name="mail" type="email" placeholder="Enter email" class="form-control">
+                                            <input name="email" type="email" placeholder="Enter email" class="form-control">
 										</div>
                                         <div class="form-group">
                                             <label>Password</label>
@@ -119,7 +119,7 @@
                         <script>
                             document.write(new Date().getFullYear())
                         </script>
-                        <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                        <a href="https://github.com/AbhiTaker">AbhiTaker</a>, made with love for a better web
                     </p>
                 </nav>
             </div>
