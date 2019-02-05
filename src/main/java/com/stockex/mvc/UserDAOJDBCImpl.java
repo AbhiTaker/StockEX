@@ -27,6 +27,12 @@ public class UserDAOJDBCImpl implements UserDAO {
     return user;
   }
   
+  public String getUsername(String email) {
+	    String sql = "select * from users where email = ?";
+	    User user = jdbcTemplate.queryForObject(sql, new Object[]{email}, new UserMapper());
+	    return user.getFirstName();
+	  }
+  
   public List<User> listUsers() {
     String sql = "select * from users";
     List<User> users = jdbcTemplate.query(sql, new UserMapper());

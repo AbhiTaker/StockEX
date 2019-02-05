@@ -14,6 +14,8 @@ public interface UserDAO {
   // get a user with the passed email
   public User getUser(String email);
   
+  public String getUsername(String email);
+  
   // get all the users from the users table
   public List<User> listUsers();
   

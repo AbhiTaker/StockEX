@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes("email")
 public class LoginController {
 	
 	@Autowired
@@ -33,10 +35,11 @@ public class LoginController {
 		newUser.setPassword(password);
 		
 		if(auth.authenticate(newUser)) {
-			model.addAttribute("username", usertype);
-			return "dashboard";
+			model.addAttribute("email", email);
+			return "redirect:dashboard";
 		}
-		return "login";
+		
+		return "redirect:login";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET )
@@ -64,8 +67,9 @@ public class LoginController {
 		newUser.setLastName(last_name);
 		newUser.setEmail(email);
 		newUser.setPassword(password);
+		
 		if(auth.registerUser(newUser))
-			return "dashboard";
+			return "redirect:dashboard";
 		else
 			return "redirect:register";
 		

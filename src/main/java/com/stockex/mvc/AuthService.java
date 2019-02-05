@@ -16,9 +16,10 @@ public class AuthService {
 		
 		List<User> users = userJDBC.listUsers();
 		for(User val: users) {
-			if(Objects.equals(user.getEmail(), val.getEmail()) && Objects.equals(user.getEmail(), val.getEmail())
-					&& Objects.equals(user.getUsertype(), val.getUsertype()))
+			if(Objects.equals(user.getEmail(), val.getEmail()) && Objects.equals(user.getPassword(), val.getPassword())
+					&& Objects.equals(user.getUsertype(), val.getUsertype())) {
 				return true;
+			}
 		}
 		
 		return false;
