@@ -26,33 +26,33 @@
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="" class="simple-text logo-mini">
+                    <a href="http://www.creative-tim.com" class="simple-text logo-mini">
                         SX
                     </a>
-                    <a href="" class="simple-text logo-normal">
+                    <a href="http://www.creative-tim.com" class="simple-text logo-normal">
                         STOCK EX
                     </a>
                 </div>
                 <div class="user">
                     <div class="photo">
-                        <img src="assets/img/tim_80x80.png" />
+                        <img src="assets/img/default-avatar.png" />
                     </div>
                     <div class="info ">
                         <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                            <span>${first_name}
+                            <span>${username}
                                 <b class="caret"></b>
                             </span>
                         </a>
                         <div class="collapse" id="collapseExample">
                             <ul class="nav">
                                 <li>
-                                    <a class="profile-dropdown" href="/stockex/myprofile">
+                                    <a class="profile-dropdown" href="/myprofile">
                                         <span class="sidebar-mini">MP</span>
                                         <span class="sidebar-normal">My Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="profile-dropdown" href="/stockex/editprofile">
+                                    <a class="profile-dropdown" href="/editprofile">
                                         <span class="sidebar-mini">EP</span>
                                         <span class="sidebar-normal">Edit Profile</span>
                                     </a>
@@ -947,8 +947,8 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?YOUR_KEY_HERE"></script>
 <!--  Chartist Plugin  -->
 <script src="assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    
-<script src="assets/js/plugins/bootstrap-notify.js"></script> -->
+<!--  Notifications Plugin    -->
+<script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!--  jVector Map  -->
 <script src="assets/js/plugins/jquery-jvectormap.js" type="text/javascript"></script>
 <!--  Plugin for Date Time Picker and Full Calendar Plugin-->

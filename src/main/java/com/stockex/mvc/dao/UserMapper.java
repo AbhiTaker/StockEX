@@ -1,8 +1,10 @@
-package com.stockex.mvc;
+package com.stockex.mvc.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
+
+import com.stockex.mvc.entities.User;
 
 public class UserMapper implements RowMapper<User> {
 

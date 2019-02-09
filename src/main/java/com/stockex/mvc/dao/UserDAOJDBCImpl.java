@@ -1,9 +1,11 @@
-package com.stockex.mvc;
+package com.stockex.mvc.dao;
 
 import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import com.stockex.mvc.entities.User;
 
 public class UserDAOJDBCImpl implements UserDAO {
 

@@ -27,7 +27,7 @@
 		</bean>
 
 		<!-- Definition for UserDAOJDBCImpl bean (JDBC Implementation Class) -->
-		<bean id="UserDAOJDBCImpl" class="com.stockex.mvc.UserDAOJDBCImpl">
+		<bean id="UserDAOJDBCImpl" class="com.stockex.mvc.dao.UserDAOJDBCImpl">
   			<property name="dataSource" ref="dataSource" />
 		</bean>
     	

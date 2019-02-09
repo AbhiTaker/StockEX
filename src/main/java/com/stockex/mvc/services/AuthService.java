@@ -1,10 +1,13 @@
-package com.stockex.mvc;
+package com.stockex.mvc.services;
 
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.stockex.mvc.dao.UserDAOJDBCImpl;
+import com.stockex.mvc.entities.User;
 
 @Service
 public class AuthService {

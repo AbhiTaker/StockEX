@@ -1,7 +1,9 @@
-package com.stockex.mvc;
+package com.stockex.mvc.dao;
 
 import java.util.List;
 import javax.sql.DataSource;
+
+import com.stockex.mvc.entities.User;
 
 public interface UserDAO {
   
