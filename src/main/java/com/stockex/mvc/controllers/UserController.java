@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.stockex.mvc.dao.UserDAOJDBCImpl;
 import com.stockex.mvc.entities.User;
+import com.stockex.mvc.services.AuthService;
 
 @Controller
 @SessionAttributes("email")
@@ -21,6 +22,9 @@ public class UserController {
 	
 	@Autowired
 	private UserDAOJDBCImpl userJDBC;
+	
+	@Autowired
+	private AuthService auth;
 	
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET )
 	public ModelAndView UserDashboard(HttpSession session) {
@@ -48,6 +52,7 @@ public class UserController {
 		ModelAndView model = new ModelAndView();
 		
 		String email = (String)session.getAttribute("email");
+		
 		User newUser = userJDBC.getUser(email);
 		model.addObject("usertype", newUser.getUsertype());
 		model.addObject("email", newUser.getEmail());
@@ -59,10 +64,33 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/editprofile", method = RequestMethod.POST )
-	public ModelAndView EditProfile(HttpSession session, @RequestParam String first_name) {
+	public ModelAndView EditProfile(HttpSession session, @RequestParam String first_name,
+			@RequestParam String last_name, @RequestParam String new_password, 
+			@RequestParam String password) {
 		
 		ModelAndView model = new ModelAndView();
-		model.setViewName("editprofile");
+		// redirecting back to GET method
+		model.setViewName("redirect:editprofile");
+		
+		String email = (String)session.getAttribute("email");
+		
+		User user = userJDBC.getUser(email);
+		user.setEmail(email);
+		user.setFirstName(first_name);
+		user.setLastName(last_name);
+		user.setPassword(password);
+		
+		// current Password verification
+		if(!auth.authenticate(user)) {
+			return model;
+		}
+		
+		if(!(new_password.isEmpty())) {
+			user.setPassword(new_password);
+		}
+		
+		userJDBC.updateUser(user);
+		 
 		return model;
 	}
 

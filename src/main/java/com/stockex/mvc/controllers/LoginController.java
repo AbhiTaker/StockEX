@@ -22,7 +22,7 @@ import com.stockex.mvc.services.AuthService;
 public class LoginController {
 	
 	@Autowired
-	AuthService auth;
+	private AuthService auth;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET )
 	public ModelAndView logIn(HttpSession session) {

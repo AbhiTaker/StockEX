@@ -41,10 +41,11 @@ public class UserDAOJDBCImpl implements UserDAO {
     return users;
   }
   
-  public void updatePassword(String email, String password){
-    String sql = "update users set password = ? where email= ?";
-    jdbcTemplate.update(sql, password, email);
-    System.out.println("Updated Record with Email = " +  email);
+  public void updateUser(User user){
+	  
+    String sql = "update users set first_name = ?, last_name = ?, password = ? where email= ?";
+    jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getPassword(), user.getEmail());
+    System.out.println("Updated Record with Email = " +  user.getEmail());
   }
   
   public void delete(String email){
