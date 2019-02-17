@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.stockex.mvc.entities.User;
 import com.stockex.mvc.services.AuthService;
+import com.stockex.mvc.services.StockInfoService;
 
 @Controller
 @SessionAttributes("email")
@@ -24,9 +25,12 @@ public class LoginController {
 	@Autowired
 	private AuthService auth;
 	
+	@Autowired 
+	StockInfoService s;
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET )
 	public ModelAndView logIn(HttpSession session) {
-		
+		s.stockInfoService();
 		ModelAndView model = new ModelAndView();
 		model.setViewName("login");
 		return model;

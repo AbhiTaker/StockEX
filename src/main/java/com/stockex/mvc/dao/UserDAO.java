@@ -21,7 +21,7 @@ public interface UserDAO {
   // get all the users from the users table
   public List<User> listUsers();
   
-  // update a user's password given the user's Email
+  // update a user's information given the users
   public void updateUser(User user);
   
   // delete a user record from the users table given the user's Email

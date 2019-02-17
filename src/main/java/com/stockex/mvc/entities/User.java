@@ -1,6 +1,5 @@
 package com.stockex.mvc.entities;
 
-import org.springframework.ui.Model;
 
 public class User {
 	

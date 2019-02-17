@@ -31,7 +31,11 @@ public class UserController {
 		
 		ModelAndView model = new ModelAndView();
 		String email = (String)session.getAttribute("email");
-		model.addObject("first_name", userJDBC.getUsername(email));
+
+		User user = userJDBC.getUser(email);
+		model.addObject("usertype", user.getUsertype());
+		model.addObject("first_name", user.getFirstName());
+		
 		model.setViewName("dashboard");
 		return model;
 	}
