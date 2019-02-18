@@ -30,7 +30,8 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET )
 	public ModelAndView logIn(HttpSession session) {
-		s.stockInfoService();
+		
+		// s.stockInfoService();
 		ModelAndView model = new ModelAndView();
 		model.setViewName("login");
 		return model;
@@ -48,7 +49,7 @@ public class LoginController {
 		
 		// Authenticating the login details of user 
 		if(auth.authenticate(newUser)) {
-			model.setViewName("redirect:dashboard");
+			model.setViewName("redirect:portfolio");
 			session.setAttribute("email", email);
 			return model;
 		}
@@ -68,6 +69,7 @@ public class LoginController {
 		
 		ModelAndView model = new ModelAndView();
 		session.invalidate();
+		
 		model.setViewName("redirect:login");
 		return model;
 	}

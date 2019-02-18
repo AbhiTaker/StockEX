@@ -64,12 +64,12 @@
                 </div>
                 <ul class="nav">
                     <li class="nav-item ">
-                        <a class="nav-link" href="./dashboard.html">
+                        <a class="nav-link" href="/stockex/portfolio">
                             <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Dashboard</p>
+                            <p>Portfolio</p>
                         </a>
                     </li>
-                    <c:if test = "${usertype == 'admin'}">
+                    <c:if test = "${usertype == 'client'}">
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
                                 <i class="nc-icon nc-app"></i>
@@ -136,7 +136,7 @@
                                 <i class="fa fa-navicon visible-on-sidebar-mini"></i>
                             </button>
                         </div>
-                        <a class="navbar-brand" href="#pablo"> Dashboard PRO </a>
+                        <a class="navbar-brand" href="#pablo"> STOCKEX PRO </a>
                     </div>
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -198,7 +198,7 @@
                                     <a class="dropdown-item" href="#">
                                         <i class="nc-icon nc-lock-circle-open"></i> Lock Screen
                                     </a>
-                                    <a href="#" class="dropdown-item text-danger">
+                                    <a href="/stockex/logout" class="dropdown-item text-danger">
                                         <i class="nc-icon nc-button-power"></i> Log out
                                     </a>
                                 </div>

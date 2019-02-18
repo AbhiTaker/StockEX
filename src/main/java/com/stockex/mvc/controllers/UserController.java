@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stockex.mvc.dao.UserDAOJDBCImpl;
+import com.stockex.mvc.entities.Account;
 import com.stockex.mvc.entities.User;
+import com.stockex.mvc.services.AccountService;
 import com.stockex.mvc.services.AuthService;
 
 @Controller
@@ -26,8 +28,13 @@ public class UserController {
 	@Autowired
 	private AuthService auth;
 	
-	@RequestMapping(value = "/dashboard", method = RequestMethod.GET )
+	@Autowired
+	private AccountService acc;
+	
+	@RequestMapping(value = "/portfolio", method = RequestMethod.GET )
 	public ModelAndView UserDashboard(HttpSession session) {
+		
+		System.out.println(session.getId());
 		
 		ModelAndView model = new ModelAndView();
 		String email = (String)session.getAttribute("email");
@@ -36,7 +43,10 @@ public class UserController {
 		model.addObject("usertype", user.getUsertype());
 		model.addObject("first_name", user.getFirstName());
 		
-		model.setViewName("dashboard");
+		Account account = acc.getInformation(email);
+		model.addObject("account", account);
+		
+		model.setViewName("portfolio");
 		return model;
 	}
 	

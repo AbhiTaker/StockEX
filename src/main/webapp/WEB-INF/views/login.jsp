@@ -28,11 +28,6 @@
                 </div>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="../dashboard.html" class="nav-link">
-                                <i class="nc-icon nc-chart-pie-35"></i> Dashboard
-                            </a>
-                        </li>
                         <li class="nav-item ">
                             <a href="register.html" class="nav-link">
                                 <i class="nc-icon nc-badge"></i> Register
