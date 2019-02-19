@@ -1,5 +1,7 @@
 package com.stockex.mvc.controllers;
 
+import java.util.Objects;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +45,10 @@ public class UserController {
 		model.addObject("usertype", user.getUsertype());
 		model.addObject("first_name", user.getFirstName());
 		
-		Account account = acc.getInformation(email);
-		model.addObject("account", account);
+		if(Objects.equals(user.getUsertype(), "client")) {
+			Account account = acc.getInformation(email);
+			model.addObject("account", account);
+		}
 		
 		model.setViewName("portfolio");
 		return model;

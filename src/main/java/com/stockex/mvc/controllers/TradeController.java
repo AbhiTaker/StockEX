@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.stockex.mvc.dao.StockDAOJDBCImpl;
 import com.stockex.mvc.dao.UserDAOJDBCImpl;
+import com.stockex.mvc.entities.Order;
 import com.stockex.mvc.entities.Stock;
 import com.stockex.mvc.entities.User;
 import com.stockex.mvc.services.StockInfoService;
@@ -52,6 +53,8 @@ public class TradeController {
 	public ModelAndView Trade(HttpSession session) {
 		
 		ModelAndView model = fillModel(session);
+		List<Stock> stockList = stockJDBC.listStocks(); 
+		model.addObject("stockList", stockList);
 		
 		model.setViewName("trade");
 		return model;
@@ -59,11 +62,36 @@ public class TradeController {
 	
 	@RequestMapping(value = "/trade", method = RequestMethod.POST )
 	public ModelAndView Trade(HttpSession session, @RequestParam String symbol,
-			@RequestParam String name) {
+			@RequestParam String type, @RequestParam int quantity, @RequestParam float price) {
 		
 		ModelAndView model = fillModel(session);
-				
-		model.setViewName("trade");
+		
+		System.out.println(symbol);
+		System.out.println(type);
+		System.out.println(quantity);
+		System.out.println(price);
+		
+		Order order = new Order();
+		order.setOrderSymbol(symbol);
+		order.setType(type);
+		order.setQuantity(quantity);
+		order.setPrice(price);
+		
+		Stock stock = stockJDBC.getStock(symbol);
+		order.setComission(30);
+		order.setTotal(order.getQuantity()*order.getPrice() + order.getCommission());
+		model.addObject("order", order);
+		model.addObject("stock", stock);
+		model.setViewName("previewOrder");
+		return model;
+	}
+	
+	@RequestMapping(value = "/previewOrder", method = RequestMethod.POST )
+	public ModelAndView previewOrder(HttpSession session,  @RequestParam int quantity, @RequestParam float price) {
+		
+		ModelAndView model = fillModel(session);
+		
+		model.setViewName("redirect:trade");
 		return model;
 	}
 	

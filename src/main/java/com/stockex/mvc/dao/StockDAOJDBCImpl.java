@@ -27,8 +27,9 @@ public class StockDAOJDBCImpl implements StockDAO {
 	}
 
 	public Stock getStock(String symbol) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from stock where symbol = ?";
+		Stock stock = jdbcTemplate.queryForObject(sql, new Object[]{symbol}, new StockMapper());;
+		return stock;
 	}
 
 	public String getUsername(String email) {
