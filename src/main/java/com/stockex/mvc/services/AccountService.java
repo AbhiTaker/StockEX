@@ -18,8 +18,7 @@ public class AccountService {
 	
 	public Account getInformation(String email) {
 		
-		Account account = new Account();
-		account.setCash(accountJDBC.getCash(email));
+		Account account = accountJDBC.getAccount(email);	
 		return account;
 		
 	}

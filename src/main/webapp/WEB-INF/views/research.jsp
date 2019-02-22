@@ -14,7 +14,6 @@
                         <table id="bootstrap-table" class="table">
                             <thead>
                                 <th data-field="state" data-checkbox="true"></th>
-                                <th data-field="id" class="text-center">ID</th>
                                 <th data-field="symbol" data-sortable="true">Symbol</th>
                                 <th data-field="company" data-sortable="true">Company</th>
                                 <th data-field="price" data-sortable="true">Stock Price</th>
@@ -24,7 +23,6 @@
                                 <c:forEach items="${stocks}" var="item">
                                     <tr>
                                         <td></td>
-                                        <td>1</td>
                                         <td>${item.getSymbol()}</td>
                                         <td>${item.getName()}</td>
                                         <td>$${item.getPrice()}</td>

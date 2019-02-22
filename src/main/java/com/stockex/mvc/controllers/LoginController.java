@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session.Cookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,10 +50,17 @@ public class LoginController {
 		
 		// Authenticating the login details of user 
 		if(auth.authenticate(newUser)) {
-			model.setViewName("redirect:portfolio");
+			if(Objects.equals(usertype, "admin")) {
+				model.setViewName("redirect:addbroker");
+			}
+			else {
+				model.setViewName("redirect:portfolio");
+			}
 			session.setAttribute("email", email);
 			return model;
 		}
+		
+		model.addObject("error", "Incorrect Credentials");
 		model.setViewName("login");
 		return model;
 	}
@@ -64,15 +72,6 @@ public class LoginController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/logout")
-	public ModelAndView logOut(HttpSession session) {
-		
-		ModelAndView model = new ModelAndView();
-		session.invalidate();
-		
-		model.setViewName("redirect:login");
-		return model;
-	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST )
 	public ModelAndView registerUser(HttpSession session, @RequestParam String first_name, 
@@ -97,10 +96,11 @@ public class LoginController {
 		// Validating the non-existence of New User using AuthService
 		if(auth.registerUser(newUser)) {
 			session.setAttribute("email", email);
-			model.setViewName("dashboard");
+			model.setViewName("redirect:portfolio");
 			return model;
 		}
 		
+		model.addObject("error", "registration unsuccessful");
 		model.setViewName("redirect:register");
 		return model;
 		

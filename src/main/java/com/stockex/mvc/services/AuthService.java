@@ -3,6 +3,8 @@ package com.stockex.mvc.services;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +46,22 @@ public class AuthService {
 		// Adding Default amount into account for new user
 		accountJDBC.insertAccount(user.getEmail(), 10000);
 		return true;
+	}
+	
+	public boolean validUser(HttpSession session) {
+		
+		try {
+			String email = (String)session.getAttribute("email");
+			if(email==null) {
+				return false;
+			}
+			return true;
+		}
+		catch(Exception e) {
+			System.out.println("WOW" + e);
+			return false;
+		}
+		
 	}
 	
 

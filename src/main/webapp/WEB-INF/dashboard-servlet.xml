@@ -38,6 +38,10 @@
 		<bean id="AccountDAOJDBCImpl" class="com.stockex.mvc.dao.AccountDAOJDBCImpl">
   			<property name="dataSource" ref="dataSource" />
 		</bean>
+		
+		<bean id="OrderDAOJDBCImpl" class="com.stockex.mvc.dao.OrderDAOJDBCImpl">
+  			<property name="dataSource" ref="dataSource" />
+		</bean>
     	
     	<!-- For mapping to /assests for css, img and js files-->
     	<mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" />

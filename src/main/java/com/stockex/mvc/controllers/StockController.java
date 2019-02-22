@@ -18,6 +18,7 @@ import com.stockex.mvc.dao.StockDAOJDBCImpl;
 import com.stockex.mvc.dao.UserDAOJDBCImpl;
 import com.stockex.mvc.entities.Stock;
 import com.stockex.mvc.entities.User;
+import com.stockex.mvc.services.AuthService;
 import com.stockex.mvc.services.StockInfoService;
 
 @Controller
@@ -32,6 +33,9 @@ public class StockController {
 	
 	@Autowired
 	private StockInfoService stockService;
+	
+	@Autowired
+	private AuthService auth;
 	
 	private ModelAndView fillModel(HttpSession session) {
 		
@@ -51,7 +55,14 @@ public class StockController {
 	@RequestMapping(value = "/addstock", method = RequestMethod.GET )
 	public ModelAndView AddStock(HttpSession session) {
 		
-		ModelAndView model = fillModel(session);
+		ModelAndView model = new ModelAndView();
+		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
 		model.setViewName("addstock");
 		return model;
 	}
@@ -60,7 +71,14 @@ public class StockController {
 	public ModelAndView AddStock(HttpSession session, @RequestParam String symbol,
 			@RequestParam String name) {
 		
-		ModelAndView model = fillModel(session);
+		ModelAndView model = new ModelAndView();
+		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
 		Stock stock = new Stock();
 		stock.setSymbol(symbol);
 		stock.setName(name);
@@ -74,7 +92,14 @@ public class StockController {
 	@RequestMapping(value = "/research", method = RequestMethod.GET)
 	public ModelAndView stockResearch(HttpSession session) {
 		
-		ModelAndView model = fillModel(session);
+		ModelAndView model = new ModelAndView();
+		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
 		List<Stock> stocks = stockJDBC.listStocks();
 		
 		model.addObject("stocks", stocks);

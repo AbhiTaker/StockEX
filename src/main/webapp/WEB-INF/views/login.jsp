@@ -70,6 +70,7 @@
                                             <label>Password</label>
                                             <input name="password" type="password" placeholder="Password" class="form-control">
                                         </div>
+                                        <label style="color:red">${error}</label>
                                     </div>
                                 </div>
                                 <div class="card-footer ml-auto mr-auto">

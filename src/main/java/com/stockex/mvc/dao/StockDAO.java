@@ -23,4 +23,6 @@ public interface StockDAO {
 	  // update a stock given the Stock
 	  public void updatePrice(String symbol, float price);
 	  
+	  public String getCompany(String symbol);
+	  
 }

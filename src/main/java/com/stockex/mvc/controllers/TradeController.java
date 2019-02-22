@@ -1,5 +1,7 @@
 package com.stockex.mvc.controllers;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.stockex.mvc.dao.AccountDAOJDBCImpl;
+import com.stockex.mvc.dao.OrderDAOJDBCImpl;
 import com.stockex.mvc.dao.StockDAOJDBCImpl;
 import com.stockex.mvc.dao.UserDAOJDBCImpl;
 import com.stockex.mvc.entities.Order;
 import com.stockex.mvc.entities.Stock;
 import com.stockex.mvc.entities.User;
+import com.stockex.mvc.services.AuthService;
+import com.stockex.mvc.services.OrderService;
 import com.stockex.mvc.services.StockInfoService;
 
 @Controller
@@ -33,6 +39,19 @@ public class TradeController {
 	
 	@Autowired
 	private StockInfoService stockService;
+	
+	@Autowired
+	private OrderService orderService;
+	
+	@Autowired
+	private AccountDAOJDBCImpl accountJDBC;
+	
+	@Autowired
+	private OrderDAOJDBCImpl orderJDBC;
+	
+	@Autowired
+	private AuthService auth;
+	
 	
 	private ModelAndView fillModel(HttpSession session) {
 		
@@ -52,7 +71,14 @@ public class TradeController {
 	@RequestMapping(value = "/trade", method = RequestMethod.GET )
 	public ModelAndView Trade(HttpSession session) {
 		
-		ModelAndView model = fillModel(session);
+		ModelAndView model = new ModelAndView();
+		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
 		List<Stock> stockList = stockJDBC.listStocks(); 
 		model.addObject("stockList", stockList);
 		
@@ -64,12 +90,16 @@ public class TradeController {
 	public ModelAndView Trade(HttpSession session, @RequestParam String symbol,
 			@RequestParam String type, @RequestParam int quantity, @RequestParam float price) {
 		
-		ModelAndView model = fillModel(session);
+		ModelAndView model = new ModelAndView();
 		
-		System.out.println(symbol);
-		System.out.println(type);
-		System.out.println(quantity);
-		System.out.println(price);
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
+		
+		String email = (String)session.getAttribute("email");
 		
 		Order order = new Order();
 		order.setOrderSymbol(symbol);
@@ -78,10 +108,15 @@ public class TradeController {
 		order.setPrice(price);
 		
 		Stock stock = stockJDBC.getStock(symbol);
-		order.setComission(30);
-		order.setTotal(order.getQuantity()*order.getPrice() + order.getCommission());
+		order.setTotal(order.getQuantity()*order.getPrice());
+		
 		model.addObject("order", order);
 		model.addObject("stock", stock);
+		
+		orderService.placeOrder(order, email);
+		if(accountJDBC.getCash(email) < order.getPrice()) {
+			model.addObject("error", "ORDER IS WRNOG");
+		}
 		model.setViewName("previewOrder");
 		return model;
 	}
@@ -89,7 +124,14 @@ public class TradeController {
 	@RequestMapping(value = "/previewOrder", method = RequestMethod.POST )
 	public ModelAndView previewOrder(HttpSession session,  @RequestParam int quantity, @RequestParam float price) {
 		
-		ModelAndView model = fillModel(session);
+		ModelAndView model = new ModelAndView();
+		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
 		
 		model.setViewName("redirect:trade");
 		return model;
@@ -98,8 +140,20 @@ public class TradeController {
 	@RequestMapping(value = "/opentrade", method = RequestMethod.GET)
 	public ModelAndView openTrade(HttpSession session) {
 		
-		ModelAndView model = fillModel(session);
+		ModelAndView model = new ModelAndView();
 		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
+		
+		String email = (String)session.getAttribute("email");
+		
+		List<Order> orders = orderJDBC.getOrder(email);
+		
+		model.addObject("orders", orders);
 		model.setViewName("opentrade");
 		return model;
 	}
@@ -107,8 +161,20 @@ public class TradeController {
 	@RequestMapping(value = "/history", method = RequestMethod.GET)
 	public ModelAndView History(HttpSession session) {
 		
-		ModelAndView model = fillModel(session);
+		ModelAndView model = new ModelAndView();
 		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
+		
+		String email = (String)session.getAttribute("email");
+		
+		List<Order> orders = orderJDBC.getAllOrder(email);
+		
+		model.addObject("orders", orders);
 		model.setViewName("history");
 		return model;
 	}

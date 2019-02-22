@@ -52,22 +52,24 @@
                                         <span class="sidebar-normal">Edit Profile</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="profile-dropdown" href="/settings">
-                                        <span class="sidebar-mini">S</span>
-                                        <span class="sidebar-normal">Settings</span>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <ul class="nav">
                     <li class="nav-item ">
-                        <a class="nav-link" href="/stockex/portfolio">
-                            <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Portfolio</p>
-                        </a>
+                        <c:if test = "${usertype == 'client'}">
+                            <a class="nav-link" href="/stockex/portfolio">
+                                <i class="nc-icon nc-chart-pie-35"></i>
+                                <p>Portfolio</p>
+                            </a>
+                        </c:if>
+                        <c:if test = "${usertype == 'admin'}">
+                            <a class="nav-link" href="/stockex/addbroker">
+                                <i class="nc-icon nc-chart-pie-35"></i>
+                                <p>ADD BROKER</p>
+                            </a>
+                        </c:if>
                     </li>
                     <c:if test = "${usertype == 'client'}">
                         <li class="nav-item">

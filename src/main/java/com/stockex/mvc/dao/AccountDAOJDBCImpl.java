@@ -26,5 +26,11 @@ public class AccountDAOJDBCImpl implements AccountDAO{
 		Account account  = jdbcTemplate.queryForObject(sql, new Object[]{email}, new AccountMapper());
 	    return account.getCash();
 	}
+	
+	public Account getAccount(String email) {
+		String sql = "select cash from account where email = ?";
+		Account account  = jdbcTemplate.queryForObject(sql, new Object[]{email}, new AccountMapper());
+	    return account;
+	}
 
 }

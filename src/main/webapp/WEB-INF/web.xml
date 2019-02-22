@@ -8,6 +8,7 @@
 		<welcome-file>login</welcome-file>
 	</welcome-file-list>
 	
+
 	<servlet>
 	    <servlet-name>dispatcher</servlet-name>
 	        <servlet-class>

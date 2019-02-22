@@ -14,6 +14,7 @@ public class AccountMapper implements RowMapper<Account> {
 		
 		Account account = new Account();
 		account.setCash(rs.getFloat("cash"));
+		account.setValue(rs.getFloat("cash"));
 		
 		return account;
 	}

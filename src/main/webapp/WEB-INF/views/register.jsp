@@ -118,6 +118,7 @@
                                                 <div class="form-group">
                                                     <input name="confirm_password" type="password" placeholder="Password Confirmation" class="form-control">
                                                 </div>
+                                                <label style="color:red">${error}</label>
                                             </div>
                                             <div class="footer text-center">
                                                 <button type="submit" class="btn btn-fill btn-neutral btn-wd">Create Account</button>

@@ -51,4 +51,11 @@ public class StockDAOJDBCImpl implements StockDAO {
 	    System.out.println("STOCK " + symbol + " price " + price);
 	}
 
+	public String getCompany(String symbol) {
+		
+		String sql = "select * from stocks where symbol = ?";
+		Stock stock = jdbcTemplate.queryForObject(sql, new Object[]{symbol}, new StockMapper());;
+		return stock.getName();
+	}
+
 }
