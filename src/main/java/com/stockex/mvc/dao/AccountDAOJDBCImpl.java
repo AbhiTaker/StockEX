@@ -27,10 +27,23 @@ public class AccountDAOJDBCImpl implements AccountDAO{
 	    return account.getCash();
 	}
 	
+	public float getCash(int OrderId) {
+		String sql = "select cash from account where email in (select email from transaction where orderid = ?)";
+		Account account  = jdbcTemplate.queryForObject(sql, new Object[]{OrderId}, new AccountMapper());
+	    return account.getCash();
+	}
+	
 	public Account getAccount(String email) {
 		String sql = "select cash from account where email = ?";
 		Account account  = jdbcTemplate.queryForObject(sql, new Object[]{email}, new AccountMapper());
 	    return account;
 	}
-
+	
+	public void updateAccount(int orderId, float cash) {
+		
+		String sql = "update account set cash = ? where email in (select email from transaction where orderId = ?)";
+		System.out.println("YEH" + cash + orderId);
+		jdbcTemplate.update(sql, cash, orderId);
+		   
+	}
 }

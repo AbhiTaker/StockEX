@@ -29,7 +29,7 @@
                 <script>
                     document.write(new Date().getFullYear())
                 </script>
-                <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                <a href="http://www.abhitaker.tech">StockEX</a>, made with love for a better economy
             </p>
         </nav>
     </div>
@@ -224,7 +224,23 @@
             }
 
             var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            
+            var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "/stockex/execute");
+
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "text");
+            hiddenField.setAttribute("name", "orderId");
+            hiddenField.setAttribute("value", data[0]);
+
+            form.appendChild(hiddenField);
+
+            document.body.appendChild(form);
+            form.submit();
+            
+            
+            //alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
         });
 
         // Delete a record

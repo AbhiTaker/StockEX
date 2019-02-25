@@ -61,13 +61,13 @@ public class UserController {
 		model.addObject("usertype", user.getUsertype());
 		model.addObject("first_name", user.getFirstName());
 		
-		if(Objects.equals(user.getUsertype(), "client")) {
 			Account account = acc.getInformation(email);
 			List<Order> orders = orderJDBC.getPortfolio(email);
 			
 			if(orders!=null) {
 				for(Order order: orders) {
 					
+					System.out.println("HERE IT IS " + order.getOrderId());
 					Stock stock = stockJDBC.getStock(order.getOrderSymbol());
 					order.setCompany(stock.getName());
 					order.setCurrentprice(stock.getPrice());
@@ -75,14 +75,11 @@ public class UserController {
 				}
 			}
 			account.setBuying_power(account.getCash() + (account.getValue() - account.getCash())*(float)0.5);
-			/*
-			System.out.println(account.getValue());
-			System.out.println(account.getCash());
-			System.out.println(account.getBuying_power());
-			*/
-			model.addObject("account", account);
+		
+			
 			model.addObject("orders", orders);
-		}
+			model.addObject("account", account);
+			
 		
 		model.setViewName("portfolio");
 		return model;

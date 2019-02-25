@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,6 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>StockEX</title>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -18,6 +18,7 @@
 </head>
 
 <body>
+
     <div class="wrapper">
         <div class="sidebar" data-color="orange" data-image="assets/img/sidebar-5.jpg">
             <!--
@@ -57,20 +58,22 @@
                     </div>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item ">
-                        <c:if test = "${usertype == 'client'}">
+                    <c:if test = "${usertype == 'client'}">
+                        <li class="nav-item ">
                             <a class="nav-link" href="/stockex/portfolio">
                                 <i class="nc-icon nc-chart-pie-35"></i>
                                 <p>Portfolio</p>
                             </a>
-                        </c:if>
-                        <c:if test = "${usertype == 'admin'}">
+                        </li>       
+                    </c:if>
+                    <c:if test = "${usertype == 'admin'}">
+                        <li class="nav-item ">
                             <a class="nav-link" href="/stockex/addbroker">
                                 <i class="nc-icon nc-chart-pie-35"></i>
                                 <p>ADD BROKER</p>
                             </a>
-                        </c:if>
-                    </li>
+                        </li>
+                    </c:if>
                     <c:if test = "${usertype == 'client'}">
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
@@ -88,7 +91,6 @@
                                             <span class="sidebar-normal">Trade Stock</span>
                                         </a>
                                     </li>
-                                    </li>
                                     <li class="nav-item ">
                                         <a class="nav-link" href="/stockex/opentrade">
                                             <span class="sidebar-mini">OT</span>
@@ -103,6 +105,15 @@
                                     </li>
                                 </ul>
                             </div>
+                        </li>
+                    </c:if>
+
+                    <c:if test = "${usertype == 'broker'}">
+                        <li class="nav-item ">
+                                <a class="nav-link" href="/stockex/alltrade">
+                                    <i class="nc-icon nc-chart-pie-35"></i>
+                                    <p>ALL TRADES</p>
+                                </a>
                         </li>
                     </c:if>
                     <li class="nav-item">

@@ -30,14 +30,20 @@ public class OrderService {
 		
 		Order order = orderJDBC.getOrderDetail(OrderId);
 		
-		if(Objects.equals(order.getType(), "sell")) {
+		if(Objects.equals(order.getType(), "BUY")) {
 			
+			float cash = accountJDBC.getCash(OrderId);
+			if(cash < order.getTotal()) {
+				return false;
+			}
+			
+			accountJDBC.updateAccount(OrderId, cash - order.getTotal());
+			orderJDBC.executeOrder(order);
+			return true;
 		}
-		if(accountJDBC.getCash(email) < order.getTotal()) {
+		else {
 			return false;
 		}
-		
-		return true;
 	}
 	
 }

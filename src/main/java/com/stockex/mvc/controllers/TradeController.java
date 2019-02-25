@@ -20,9 +20,11 @@ import com.stockex.mvc.dao.AccountDAOJDBCImpl;
 import com.stockex.mvc.dao.OrderDAOJDBCImpl;
 import com.stockex.mvc.dao.StockDAOJDBCImpl;
 import com.stockex.mvc.dao.UserDAOJDBCImpl;
+import com.stockex.mvc.entities.Account;
 import com.stockex.mvc.entities.Order;
 import com.stockex.mvc.entities.Stock;
 import com.stockex.mvc.entities.User;
+import com.stockex.mvc.services.AccountService;
 import com.stockex.mvc.services.AuthService;
 import com.stockex.mvc.services.OrderService;
 import com.stockex.mvc.services.StockInfoService;
@@ -51,6 +53,9 @@ public class TradeController {
 	
 	@Autowired
 	private AuthService auth;
+	
+	@Autowired
+	private AccountService acc;
 	
 	
 	private ModelAndView fillModel(HttpSession session) {
@@ -178,5 +183,49 @@ public class TradeController {
 		model.setViewName("history");
 		return model;
 	}
+	
+	@RequestMapping(value = "/alltrade", method = RequestMethod.GET)
+	public ModelAndView allTrade(HttpSession session) {
+		
+		ModelAndView model = new ModelAndView();
+		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
+		
+		List<Order> orders = orderJDBC.getActiveOrders();
+		
+		model.addObject("orders", orders);
+		model.setViewName("alltrade");
+		return model;
+	}
+	
+	@RequestMapping(value = "/execute", method = RequestMethod.POST)
+	public ModelAndView executeOrder(HttpSession session, @RequestParam int orderId) {
+		
+		ModelAndView model = new ModelAndView();
+		
+		if(!auth.validUser(session)) {
+			model.setViewName("redirect:login");
+			return model;
+		}
+		
+		model = fillModel(session);
+		String email = (String)session.getAttribute("email");
+		
+		if(orderService.executeOrder(orderId, email)) {
+			model.addObject("transaction", "SUCCESS");
+		}
+		else {
+			model.addObject("transaction", "FAILED");
+		}
+		model.setViewName("result");
+		return model;
+	}
+	
+	
 
 }

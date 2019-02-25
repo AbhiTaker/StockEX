@@ -32,7 +32,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET )
 	public ModelAndView logIn(HttpSession session) {
 		
-		// s.stockInfoService();
+		//s.stockInfoService();
 		ModelAndView model = new ModelAndView();
 		model.setViewName("login");
 		return model;
@@ -52,6 +52,9 @@ public class LoginController {
 		if(auth.authenticate(newUser)) {
 			if(Objects.equals(usertype, "admin")) {
 				model.setViewName("redirect:addbroker");
+			}
+			else if(Objects.equals(usertype, "broker")) {
+				model.setViewName("redirect:alltrade");
 			}
 			else {
 				model.setViewName("redirect:portfolio");

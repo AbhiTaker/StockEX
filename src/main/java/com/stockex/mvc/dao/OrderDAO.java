@@ -19,5 +19,8 @@ public interface OrderDAO {
 	public void executeOrder(Order order);
 	
 	public List<Order> getPortfolio(String email);
+	
+	public List<Order> getActiveOrders();
+	
 
 }

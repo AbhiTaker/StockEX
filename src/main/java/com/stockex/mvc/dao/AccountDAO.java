@@ -12,6 +12,10 @@ public interface AccountDAO {
 	
 	public float getCash(String email);
 	
+	public float getCash(int OrderId);
+	
 	public Account getAccount(String email);
+	
+	public void updateAccount(int orderId, float cash);
 
 }

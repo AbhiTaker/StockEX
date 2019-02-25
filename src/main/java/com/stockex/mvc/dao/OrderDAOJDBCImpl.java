@@ -42,8 +42,8 @@ public class OrderDAOJDBCImpl implements OrderDAO{
 	public List<Order> getOrder(String email) {
 		
 		try {
-			String sql = "select * from orders where orderId in (select orderID from transaction where email = ?)";
-			List<Order> orders = jdbcTemplate.query(sql, new Object[]{email}, new OrderMapper());
+			String sql = "select * from orders where orderId in (select orderID from transaction where email = ?) and status = ?";
+			List<Order> orders = jdbcTemplate.query(sql, new OrderMapper(), email, "WAIT");
 			return orders;
 		}
 		catch (Exception e){
@@ -52,7 +52,9 @@ public class OrderDAOJDBCImpl implements OrderDAO{
 	}
 
 	public void executeOrder(Order order) {
-		// TODO Auto-generated method stub
+		
+		String sql = "update orders set status = ? where orderId = ?";
+		jdbcTemplate.update(sql, "SUCCESS", order.getOrderId());
 		
 	}
 
@@ -79,12 +81,25 @@ public class OrderDAOJDBCImpl implements OrderDAO{
 		
 		try {
 			String sql = "select * from orders where orderId in (select orderID from transaction where email = ?) and type = ? and status = ?";
-			List<Order> orders = (List<Order>) jdbcTemplate.queryForObject(sql, new OrderMapper(), email, "BUY", "SUCCESS");
+			
+			List<Order> orders = jdbcTemplate.query(sql, new OrderMapper(), email, "BUY", "SUCCESS");
 			return orders;
 		}
 		catch (Exception e){
 			return null;
 		}
 	}
+	
+	public List<Order> getActiveOrders() {
+		try {
+			String sql = "select * from orders where status = ?";
+			List<Order> orders = jdbcTemplate.query(sql, new Object[]{"WAIT"}, new OrderMapper());
+			return orders;
+		}
+		catch (Exception e){
+			return null;
+		}
+	}
+	
 
 }
